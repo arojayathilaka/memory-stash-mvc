@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "memory-stash-mvc", "memory-stash-mvc\memory-stash-mvc.csproj", "{1524F148-E7FD-48DD-9EE8-28CA81305E1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1524F148-E7FD-48DD-9EE8-28CA81305E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1524F148-E7FD-48DD-9EE8-28CA81305E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1524F148-E7FD-48DD-9EE8-28CA81305E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1524F148-E7FD-48DD-9EE8-28CA81305E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76DAC81F-3C5E-41D0-B1BC-BB255B7BD478}
+	EndGlobalSection
+EndGlobal
