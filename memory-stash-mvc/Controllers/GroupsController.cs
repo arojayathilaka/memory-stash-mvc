@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using memory_stash.Data.Models;
+using memory_stash.Models;
 using memory_stash_mvc.Data;
 
 namespace memory_stash_mvc.Controllers
@@ -33,14 +33,18 @@ namespace memory_stash_mvc.Controllers
                 return NotFound();
             }
 
-            var @group = await _context.Groups
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (@group == null)
+            var group = await _context.Groups.FindAsync(id);
+
+            _context.Entry(group)
+                .Collection(g => g.Memories)
+                .Load();
+
+            if (group == null)
             {
                 return NotFound();
             }
 
-            return View(@group);
+            return View(group);
         }
 
         // GET: Groups/Create

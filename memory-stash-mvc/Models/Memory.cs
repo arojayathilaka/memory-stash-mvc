@@ -1,9 +1,10 @@
-﻿using System;
+﻿using memory_stash.Models;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
 
-namespace memory_stash.Data.Models
+namespace memory_stash.Models
 {
     public partial class Memory
     {
@@ -16,8 +17,8 @@ namespace memory_stash.Data.Models
         // Navigation Properties
 
         public int GroupId { get; set; }
-        public virtual Group Group { get; set; }
+        public Group Group { get; set; }
 
-        public virtual List<MemoryImage> MemoryImages { get; set; }
+        public List<MemoryImage> MemoryImages { get; set; }
     }
 }
