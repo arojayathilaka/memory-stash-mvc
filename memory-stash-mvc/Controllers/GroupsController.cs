@@ -128,14 +128,14 @@ namespace memory_stash_mvc.Controllers
                 return NotFound();
             }
 
-            var @group = await _context.Groups
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (@group == null)
+            var group = await _context.Groups.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (group == null)
             {
                 return NotFound();
             }
 
-            return View(@group);
+            return View(group);
         }
 
         // POST: Groups/Delete/5

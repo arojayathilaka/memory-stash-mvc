@@ -1,0 +1,30 @@
+﻿@model memory_stash_mvc.Models.Memory
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<div class="container">
+    <form asp-action="Delete">
+        <div class="form-group">
+
+            <label>Title</label>
+            <input asp-for="Title" type="text" class="form-control" disabled>
+
+            <label>Description</label>
+            <input asp-for="Description" type="text" class="form-control" disabled>
+
+            <label>Date</label>
+            <input asp-for="Mdate" type="date" class="form-control" disabled>
+
+            <input asp-for="GroupId" type="hidden" class="form-control">
+
+
+            <input type="submit" class="btn btn-primary mt-2" value="Delete">
+        </div>
+    </form>
+</div>
+
+

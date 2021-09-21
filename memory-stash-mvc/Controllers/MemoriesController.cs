@@ -24,10 +24,22 @@ namespace memory_stash_mvc.Controllers
 
 
         // GET: MemoriesController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                BadRequest();
+            }
+
+            var memory = await _context.Memories.FindAsync(id);
+
+            if (memory == null)
+            {
+                NotFound();
+            }
+            return View(memory);
         }
+
 
         // GET: MemoriesController/Create
         public ActionResult Create(int groupId)
@@ -38,6 +50,7 @@ namespace memory_stash_mvc.Controllers
             };
             return View(memory);
         }
+
 
         // POST: MemoriesController/Create
         [HttpPost]
@@ -52,6 +65,7 @@ namespace memory_stash_mvc.Controllers
             }
             return View(memory);
         }
+
 
         // GET: MemoriesController/Edit/5
         public async Task<IActionResult> Edit(int id)
@@ -98,25 +112,35 @@ namespace memory_stash_mvc.Controllers
 
         }
 
+
         // GET: MemoriesController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if(id == null)
+            {
+                BadRequest();
+            }
+
+            var memory = await _context.Memories.FindAsync(id);
+            
+            if(memory == null)
+            {
+                NotFound();
+            }
+            return View(memory);
         }
 
-        // POST: MemoriesController/Delete/5
-        [HttpPost]
+
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var memory = await _context.Memories.FindAsync(id);
+
+            _context.Memories.Remove(memory);
+            await _context.SaveChangesAsync();
+
+            return Redirect("/Groups/Details/"+memory.GroupId);
         }
 
         private bool MemoryExists(int id)
