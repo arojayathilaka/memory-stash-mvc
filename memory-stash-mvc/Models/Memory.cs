@@ -1,10 +1,10 @@
-﻿using memory_stash.Models;
+﻿using memory_stash_mvc.Models;
 using System;
 using System.Collections.Generic;
 
 #nullable disable
 
-namespace memory_stash.Models
+namespace memory_stash_mvc.Models
 {
     public partial class Memory
     {

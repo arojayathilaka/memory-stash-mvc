@@ -1,4 +1,4 @@
-﻿using memory_stash.Models;
+﻿using memory_stash_mvc.Models;
 using memory_stash_mvc.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +13,13 @@ namespace memory_stash_mvc.Controllers
     public class MemoriesController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly GroupsController _groupsController;
 
-        public MemoriesController(AppDbContext context)
+
+        public MemoriesController(AppDbContext context, GroupsController groupsController)
         {
             _context = context;
+            _groupsController = groupsController;
         }
 
 
@@ -45,30 +48,54 @@ namespace memory_stash_mvc.Controllers
             {
                 _context.Memories.Add(memory);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Groups/Details/"+memory.GroupId);
+                return Redirect("/Groups/Details/" + memory.GroupId);
             }
             return View(memory);
         }
 
         // GET: MemoriesController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var memory = await _context.Memories.FindAsync(id);
+            return View(memory);
         }
+
 
         // POST: MemoriesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, Memory memory)
         {
-            try
+            if(id != memory.Id || !_groupsController.GroupExists(memory.GroupId))
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest();
             }
-            catch
+
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+
+                    _context.Entry(memory).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+
+                    return Redirect("/Groups/Details/"+memory.GroupId);
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!MemoryExists(memory.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
+            return View(memory);
+
         }
 
         // GET: MemoriesController/Delete/5
@@ -90,6 +117,11 @@ namespace memory_stash_mvc.Controllers
             {
                 return View();
             }
+        }
+
+        private bool MemoryExists(int id)
+        {
+            return _context.Memories.Any(m => m.Id == id);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using memory_stash.Models;
+using memory_stash_mvc.Models;
 using memory_stash_mvc.Data;
 
 namespace memory_stash_mvc.Controllers
@@ -149,7 +149,7 @@ namespace memory_stash_mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GroupExists(int id)
+        public bool GroupExists(int id)
         {
             return _context.Groups.Any(e => e.Id == id);
         }

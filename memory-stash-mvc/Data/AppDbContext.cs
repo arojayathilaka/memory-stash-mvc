@@ -1,5 +1,5 @@
 ﻿using System;
-using memory_stash.Models;
+using memory_stash_mvc.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
