@@ -32,6 +32,11 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/CLI@v1
+      with:
+        azcliversion: 2.0.72
+        inlineScript: |
+          az account list  
         
     - name: Azure WebApp Deployement
       uses: Azure/webapps-deploy@v2
