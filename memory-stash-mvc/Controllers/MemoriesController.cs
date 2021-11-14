@@ -22,6 +22,10 @@ namespace memory_stash_mvc.Controllers
             _groupsController = groupsController;
         }
 
+        public PartialViewResult Load()
+        {
+            return PartialView("_AddImage");
+        }
 
         // GET: MemoriesController/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -71,6 +75,11 @@ namespace memory_stash_mvc.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var memory = await _context.Memories.FindAsync(id);
+
+            _context.Entry(memory)
+                .Collection(m => m.MemoryImages)
+                .Load();
+
             return View(memory);
         }
 

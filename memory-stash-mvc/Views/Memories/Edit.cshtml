@@ -21,9 +21,20 @@
 
             <input asp-for="GroupId" type="hidden" class="form-control">
 
-
             <input type="submit" class="btn btn-primary mt-2" value="Edit">
         </div>
     </form>
+
+    <div id="add_images">
+        @await Html.PartialAsync("~/Views/MemoryImages/Create.cshtml", new MemoryImage()
+        {
+            MemoryId = Model.Id
+        })
+    </div>
+
+    @foreach (var item in Model.MemoryImages)
+            {
+                <img src="@("~/image/" + item.ImageName)" asp-append-version=true width="250px" height="250px">
+            }
 </div>
 

@@ -1,0 +1,17 @@
+﻿@model memory_stash_mvc.Models.MemoryImage
+
+<h4>Add Image</h4>
+
+@using (Html.BeginForm("Create", "MemoryImages", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+
+        <input type="file" name="file" accept="image/*">
+        <input type="submit" value="Add">
+    </div>
+}
+
+
+

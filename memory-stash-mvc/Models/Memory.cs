@@ -1,5 +1,4 @@
-﻿using memory_stash_mvc.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 #nullable disable
@@ -13,12 +12,9 @@ namespace memory_stash_mvc.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
-
         // Navigation Properties
-
         public int GroupId { get; set; }
         public Group Group { get; set; }
-
-        public List<MemoryImage> MemoryImages { get; set; }
+        public virtual List<MemoryImage> MemoryImages { get; set; }
     }
 }
