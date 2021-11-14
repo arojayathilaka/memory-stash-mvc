@@ -7,7 +7,7 @@ on:
     branches: [ master ]
     
 env:
-  DOCKER_IMAGE_NAME: '${{secrets.DOCKER_USERNAME}}/memory-stash-mvc'
+  DOCKER_IMAGE_NAME: 'arojayathilaka/memory-stash-mvc'
   AZURE_WEB_APP: 'memory-stash-mvc'
   
 jobs:
