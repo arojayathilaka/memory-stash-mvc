@@ -29,9 +29,9 @@ jobs:
       run: docker push '${{env.DOCKER_IMAGE_NAME}}'
       
     - name: Azure Login
-      uses: azure/actions/login@v1
+      uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_CREDENTIALS}}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
         
     - name: Azure WebApp Deployement
       uses: Azure/webapps-deploy@v2
