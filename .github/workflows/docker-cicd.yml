@@ -7,7 +7,7 @@ on:
     branches: [ master ]
     
 env:
-  DOCKER_IMAGE_NAME: 'memory-stash-mvc'
+  DOCKER_IMAGE_NAME: '${{secrets.DOCKER_USERNAME}}/memory-stash-mvc'
   AZURE_WEB_APP: 'memory-stash-mvc'
   
 jobs:
@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag '${{secrets.DOCKER_USER_NAME}}/${{env.DOCKER_IMAGE_NAME}}:latest'
+      run: docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}:latest'
 
     - name: Docker Login
       run: docker login --username '${{secrets.DOCKER_USERNAME}}' --password '${{secrets.DOCKER_PASSWORD}}'
@@ -39,5 +39,5 @@ jobs:
         # Name of the Azure Web App
         app-name: '${{env.AZURE_WEB_APP}}'
         # Applies to Web App Container only
-        images: '${{secrets.DOCKER_USER_NAME}}/${{env.DOCKER_IMAGE_NAME}}:latest'
+        images: '${{env.DOCKER_IMAGE_NAME}}:latest'
         
